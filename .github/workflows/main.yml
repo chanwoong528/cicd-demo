@@ -25,7 +25,7 @@ jobs:
           nvm list
           npm install
           npm run build
-          pm2 serve dist/index.html 8080 --name "cicd-demo" --spa
+          pm2 serve dist --name "cicd-demo" --spa
 
 
   
