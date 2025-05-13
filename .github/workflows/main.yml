@@ -21,6 +21,7 @@ jobs:
           cd deploy-test
           cd cicd-demo
           git pull origin main
+          source ~/.nvm/nvm.sh  # Add this line to load nvm
           nvm list
           npm install
           npm run build
