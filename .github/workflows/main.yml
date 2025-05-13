@@ -25,6 +25,7 @@ jobs:
           nvm list
           npm install
           npm run build
+          pm2 delete all
           pm2 serve dist --name "cicd-demo" --spa
 
 
