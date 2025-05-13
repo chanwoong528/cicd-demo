@@ -19,8 +19,8 @@ jobs:
         port: ${{ secrets.PORT }}
         script: |
           cd deploy-test
-          git clone https://github.com/chanwoong528/cicd-demo.git
           cd cicd-demo
+          git pull origin main
           npm install
           npm run build
           pm2 serve dist/index.html 8080 --name "cicd-demo" --spa
