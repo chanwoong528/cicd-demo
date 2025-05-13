@@ -20,6 +20,7 @@ jobs:
         script: |
           cd deploy-test
           git clone https://github.com/chanwoong528/cicd-demo.git
+          cd cicd-demo
           npm install
           npm run build
           pm2 serve dist/index.html 8080 --name "cicd-demo" --spa
