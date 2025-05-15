@@ -34,7 +34,11 @@ jobs:
           port: ${{ secrets.PORT }}
           script: |
             source ~/.nvm/nvm.sh  # Add this line to load nvm
-            echo "Hello, world! done!"
+            cd deploy-test
+            cd cicd-demo
+            pm2 delete all
+            pm2 serve dist --name "cicd-demo" --spa
+            echo "deploy done!"
 
   # build-and-deploy:
   #  runs-on: ubuntu-latest
