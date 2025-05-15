@@ -25,7 +25,7 @@ jobs:
           port: ${{ secrets.PORT }}
           timeout: 100s
           source: dist/*
-          target: /Users/user/deploy-test/cicd-demo
+          target: ${{ secrets.SERVER_PATH }}
       - name: Run remote SSH commands
         uses: appleboy/ssh-action@v1
         with:
