@@ -23,6 +23,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
+          proxy_timeout: 100
           source: dist/*
           target: /Users/user/deploy-test/cicd-demo
       - name: Run remote SSH commands
@@ -32,7 +33,6 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
-          proxy_timeout: 100
           script: |
             source ~/.nvm/nvm.sh  # Add this line to load nvm
             cd deploy-test
