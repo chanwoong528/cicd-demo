@@ -24,7 +24,7 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
           source: dist/*
-          target: /deploy-test/cicd-demo/dist
+          target: /Users/user/deploy-test/cicd-demo
       - name: Run remote SSH commands
         uses: appleboy/ssh-action@v1
         with:
