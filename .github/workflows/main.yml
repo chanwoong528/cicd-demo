@@ -23,7 +23,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
-          source: ./README.md
+          source: dist/*
           target: /deploy-test/cicd-demo
       - name: Run remote SSH commands
         uses: appleboy/ssh-action@v1
