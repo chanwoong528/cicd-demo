@@ -7,26 +7,55 @@ on:
     - release/*
 
 jobs:
-  build-and-deploy:
-   runs-on: ubuntu-latest
-   steps:
-    - name: Execute remote SSH commands using password
-      uses: appleboy/ssh-action@v1
-      with:
-        host: ${{ secrets.HOST }}
-        username: ${{secrets.USERNAME}}
-        password: ${{ secrets.PASSWORD }}
-        port: ${{ secrets.PORT }}
-        script: |
-          cd deploy-test
-          cd cicd-demo
-          git pull origin main
-          source ~/.nvm/nvm.sh  # Add this line to load nvm
-          nvm list
-          npm install
-          npm run build
-          pm2 delete all
-          pm2 serve dist --name "cicd-demo" --spa
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Install dependencies
+        run: npm install
+      - name: Build
+        run: npm run build
+      - name: Copy files via SSH
+        uses: appleboy/scp-action@v1     
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          source: ./README.md
+          target: /deploy-test/cicd-demo
+      - name: Run remote SSH commands
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          script: |
+            source ~/.nvm/nvm.sh  # Add this line to load nvm
+            echo "Hello, world! done!"
+
+  # build-and-deploy:
+  #  runs-on: ubuntu-latest
+  #  steps:
+  #   - name: Execute remote SSH commands using password
+  #     uses: appleboy/ssh-action@v1
+  #     with:
+  #       host: ${{ secrets.HOST }}
+  #       username: ${{secrets.USERNAME}}
+  #       password: ${{ secrets.PASSWORD }}
+  #       port: ${{ secrets.PORT }}
+  #       script: |
+  #         cd deploy-test
+  #         cd cicd-demo
+  #         git pull origin main
+  #         source ~/.nvm/nvm.sh  # Add this line to load nvm
+  #         nvm list
+  #         npm install
+  #         npm run build
+  #         pm2 delete all
+  #         pm2 serve dist --name "cicd-demo" --spa
 
 
   
