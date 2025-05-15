@@ -24,6 +24,7 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
           timeout: 100s
+          rm:true
           source: dist/*
           target: /Users/user/deploy-test/cicd-demo
       - name: Run remote SSH commands
